@@ -31,4 +31,43 @@ public class Pokemon {
      */
     private short defense;
 
+    public long getPokemonId() {
+        return pokemonId;
+    }
+
+    public void setPokemonId(long pokemonId) {
+        this.pokemonId = pokemonId;
+    }
+
+    public String getPokemonName() {
+        return pokemonName;
+    }
+
+    public void setPokemonName(String pokemonName) {
+        this.pokemonName = pokemonName;
+    }
+
+    public short getHp() {
+        return hp;
+    }
+
+    public void setHp(short hp) {
+        this.hp = hp;
+    }
+
+    public short getAttack() {
+        return attack;
+    }
+
+    public void setAttack(short attack) {
+        this.attack = attack;
+    }
+
+    public short getDefense() {
+        return defense;
+    }
+
+    public void setDefense(short defense) {
+        this.defense = defense;
+    }
 }
