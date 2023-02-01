@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class SimpleObjectMapperFactory implements ObjectMapperFactory{
     @Override
     public ObjectMapper getObjectMapper() {
-        return new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper;
     }
 }

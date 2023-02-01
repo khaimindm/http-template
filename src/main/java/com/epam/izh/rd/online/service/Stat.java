@@ -1,40 +1,23 @@
 package com.epam.izh.rd.online.service;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Stat {
-    private short baseStat;
-    private short effort;
+    private  int baseStat;
+    private  int effort;
     private String name;
     private String url;
 
-    public short getBaseStat() {
-        return baseStat;
-    }
-
-    public void setBaseStat(short baseStat) {
+    @JsonCreator
+    public Stat(
+            @JsonProperty("base_stat") int baseStat,
+            @JsonProperty("effort") int effort,
+            @JsonProperty("name") String name,
+            @JsonProperty("url") String url) {
         this.baseStat = baseStat;
-    }
-
-    public short getEffort() {
-        return effort;
-    }
-
-    public void setEffort(short effort) {
         this.effort = effort;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
         this.url = url;
     }
 }
