@@ -15,22 +15,22 @@ public class Http {
         System.out.println("Введите имя второго покемона (например: pikachu, ditto... Список всех имен можно найти на https://pokeapi.co/):");
         String nameOfSecondPokemon = scanner.nextLine();
 
-        RestTemplate restTemplate = new RestTemplate();
-        String urlFirstPokemon = "https://pokeapi.co/api/v2/pokemon/" + nameOfFirstPokemon;
-        String urlSecondPokemon = "https://pokeapi.co/api/v2/pokemon/" + nameOfSecondPokemon;
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("User-Agent", "");
+        //RestTemplate restTemplate = new RestTemplate();
+        //String urlFirstPokemon = "https://pokeapi.co/api/v2/pokemon/" + nameOfFirstPokemon;
+        //String urlSecondPokemon = "https://pokeapi.co/api/v2/pokemon/" + nameOfSecondPokemon;
+        //HttpHeaders headers = new HttpHeaders();
+        //headers.set("User-Agent", "");
 
-        HttpEntity<String> request = new HttpEntity<>(headers);
+        //HttpEntity<String> request = new HttpEntity<>(headers);
 
-        ResponseEntity<String> responseFirstPokemon = restTemplate.exchange(urlFirstPokemon, HttpMethod.GET, request, String.class);
-        ResponseEntity<String> responseSecondPokemon = restTemplate.exchange(urlSecondPokemon, HttpMethod.GET, request, String.class);
+        //ResponseEntity<String> responseFirstPokemon = restTemplate.exchange(urlFirstPokemon, HttpMethod.GET, request, String.class);
+        //ResponseEntity<String> responseSecondPokemon = restTemplate.exchange(urlSecondPokemon, HttpMethod.GET, request, String.class);
         
-        System.out.println("Первый покемон");
-        System.out.println(responseFirstPokemon.getBody());
+        //System.out.println("Первый покемон");
+        //System.out.println(responseFirstPokemon.getBody());
 
-        System.out.println("Второй покемон");
-        System.out.println(responseSecondPokemon.getBody());
+        //System.out.println("Второй покемон");
+        //System.out.println(responseSecondPokemon.getBody());
 
         scanner.close();
     }
