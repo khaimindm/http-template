@@ -4,20 +4,31 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Stat {
-    private  int baseStat;
-    private  int effort;
-    private String name;
-    private String url;
+    public int getBaseStat() {
+        return baseStat;
+    }
 
-    @JsonCreator
+    public void setBaseStat(int baseStat) {
+        this.baseStat = baseStat;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private  int baseStat;
+    private String name;
+
+
+    /*@JsonCreator
     public Stat(
             @JsonProperty("base_stat") int baseStat,
-            @JsonProperty("effort") int effort,
-            @JsonProperty("name") String name,
-            @JsonProperty("url") String url) {
+            @JsonProperty("name") String name) {
         this.baseStat = baseStat;
-        this.effort = effort;
         this.name = name;
-        this.url = url;
-    }
+    }*/
 }

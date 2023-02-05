@@ -1,5 +1,10 @@
 package com.epam.izh.rd.online;
 
+import com.epam.izh.rd.online.factory.ObjectMapperFactory;
+import com.epam.izh.rd.online.factory.SimpleObjectMapperFactory;
+import com.epam.izh.rd.online.service.PokemonFetchingService;
+import com.epam.izh.rd.online.service.SimplePokemonFetchingService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -7,14 +12,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Http {
-    public static void main(String[] args) {
-        System.out.println("Введите имя первого покемона (например: pikachu, ditto... Список всех имен можно найти на https://pokeapi.co/):");
-        Scanner scanner = new Scanner(System.in);
-        String nameOfFirstPokemon = scanner.nextLine();
-
-        System.out.println("Введите имя второго покемона (например: pikachu, ditto... Список всех имен можно найти на https://pokeapi.co/):");
-        String nameOfSecondPokemon = scanner.nextLine();
-
+    public static void main(String[] args) throws JsonProcessingException {
         //RestTemplate restTemplate = new RestTemplate();
         //String urlFirstPokemon = "https://pokeapi.co/api/v2/pokemon/" + nameOfFirstPokemon;
         //String urlSecondPokemon = "https://pokeapi.co/api/v2/pokemon/" + nameOfSecondPokemon;
@@ -32,6 +30,10 @@ public class Http {
         //System.out.println("Второй покемон");
         //System.out.println(responseSecondPokemon.getBody());
 
-        scanner.close();
+        String pokemonName1 = "pikachu";
+        ObjectMapperFactory objectMapperFactory = new SimpleObjectMapperFactory();
+        PokemonFetchingService pokemonFetchingService = new SimplePokemonFetchingService(objectMapperFactory);
+
+        pokemonFetchingService.fetchByName(pokemonName1);
     }
 }
