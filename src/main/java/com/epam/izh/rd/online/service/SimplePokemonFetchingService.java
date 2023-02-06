@@ -45,16 +45,17 @@ public class SimplePokemonFetchingService implements  PokemonFetchingService{
         //String responseString = String.valueOf(response);
         //System.out.println(response);
 
-        List<Stat> statList = new ArrayList<>();
+        //List<Stat> statList = new ArrayList<>();
 
         JsonNode obj = objectMapperFactory.getObjectMapper().readTree(responseBody);
         String statsString = String.valueOf(obj.get("stats"));
-        for(int i = 0; i<=5; i++) {
-            Stat stat = new Stat();
-            stat.setBaseStat(obj.get("stats").get(i).get("base_stat").asInt());
-            stat.setName(obj.get("stats").get(i).get("stat").get("name").asText());
-            statList.add(stat);
-        }
+        int size = obj.get("stats").size();
+        System.out.println(size);
+
+        StatsArray statsArray = objectMapperFactory.getObjectMapper().readValue(statsString, StatsArray.class);
+        
+        System.out.println(statsArray);
+        
 
 
         Stats stats = objectMapperFactory.getObjectMapper().readValue(statsString, Stats.class);
