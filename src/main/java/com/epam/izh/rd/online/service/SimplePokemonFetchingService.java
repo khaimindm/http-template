@@ -22,8 +22,7 @@ public class SimplePokemonFetchingService implements  PokemonFetchingService{
     }
 
     RestTemplate restTemplate = new RestTemplate();    
-    HttpHeaders headers = new HttpHeaders();
-    Stats stats = new Stats();
+    HttpHeaders headers = new HttpHeaders();    
 
     @Override
     public Pokemon fetchByName(String name) throws IllegalArgumentException, JsonMappingException, JsonProcessingException {
@@ -34,6 +33,7 @@ public class SimplePokemonFetchingService implements  PokemonFetchingService{
 
 
         String responseBody = response.getBody();
+
         //System.out.println(responseBody);
         //JsonNode obj = objectMapperFactory.getObjectMapper().readTree(response.toString());
         //Pokemon pokemon = new Pokemon();
@@ -49,19 +49,29 @@ public class SimplePokemonFetchingService implements  PokemonFetchingService{
 
         JsonNode obj = objectMapperFactory.getObjectMapper().readTree(responseBody);
         String statsString = String.valueOf(obj.get("stats"));
-        int size = obj.get("stats").size();
-        System.out.println(size);
+        int size = obj.get("stats").size();               
 
-        StatsArray statsArray = objectMapperFactory.getObjectMapper().readValue(statsString, StatsArray.class);
-        
-        System.out.println(statsArray);
-        
+        Stats[] stats = objectMapperFactory.getObjectMapper().readValue(statsString, Stats[].class);
 
+        Pokemon pokemon = new Pokemon();
+        pokemon.setPokemonId(obj.get("id").asLong());
+        pokemon.setPokemonName(obj.get("name").asText());        
 
-        Stats stats = objectMapperFactory.getObjectMapper().readValue(statsString, Stats.class);
+        for (Stats eStats : stats) {
+            String nameTest = eStats.getStat().getName();
+            if(eStats.getStat().getName().equals("hp")) {
+                pokemon.setHp(eStats.getBaseStat());
+            } else {
+                continue;
+            }
+        }
 
-        //Stat stat = objectMapperFactory.getObjectMapper().readValue(String.valueOf(obj.get("stats").get(0)), Stat.class);
-        //System.out.println(stat);
+        System.out.println("Test. Base stat = " + stats[0].getBaseStat());
+        System.out.println("Pokemon");        
+        System.out.println("ID: " + pokemon.getPokemonId());
+        System.out.println("Name: " + pokemon.getPokemonName());
+        System.out.println("Hp: " + pokemon.getHp());
+
         return null;
     }
 

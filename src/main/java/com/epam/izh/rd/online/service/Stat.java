@@ -7,6 +7,11 @@ public class Stat {
     private String name;
     private String url;
     
+    @JsonCreator
+    public Stat(@JsonProperty("name") String name, @JsonProperty("url") String url) {
+        this.name = name;
+        this.url = url;
+    }
     public String getName() {
         return name;
     }

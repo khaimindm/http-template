@@ -2,15 +2,24 @@ package com.epam.izh.rd.online.service;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Stats {
-    private int baseStat;
+    private short baseStat;
     private short effort;
     private Stat stat;
     
-    public int getBaseStat() {
+    @JsonCreator
+    public Stats(@JsonProperty("base_stat") short baseStat, @JsonProperty("effort") short effort, @JsonProperty("stat") Stat stat) {
+        this.baseStat = baseStat;
+        this.effort = effort;
+        this.stat = stat;
+    }
+    public short getBaseStat() {
         return baseStat;
     }
-    public void setBaseStat(int baseStat) {
+    public void setBaseStat(short baseStat) {
         this.baseStat = baseStat;
     }
     public short getEffort() {
