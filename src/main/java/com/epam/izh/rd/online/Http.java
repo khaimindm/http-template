@@ -30,7 +30,7 @@ public class Http {
         //System.out.println("Второй покемон");
         //System.out.println(responseSecondPokemon.getBody());
 
-        String pokemonName1 = "pikachu";
+        String pokemonName1 = "slowpoke";
         ObjectMapperFactory objectMapperFactory = new SimpleObjectMapperFactory();
         PokemonFetchingService pokemonFetchingService = new SimplePokemonFetchingService(objectMapperFactory);
 
