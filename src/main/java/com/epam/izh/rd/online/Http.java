@@ -26,13 +26,8 @@ public class Http {
 
         //ResponseEntity<String> responseFirstPokemon = restTemplate.exchange(urlFirstPokemon, HttpMethod.GET, request, String.class);
         //ResponseEntity<String> responseSecondPokemon = restTemplate.exchange(urlSecondPokemon, HttpMethod.GET, request, String.class);
+
         
-        //System.out.println("Первый покемон");
-        //System.out.println(responseFirstPokemon.getBody());
-
-        //System.out.println("Второй покемон");
-        //System.out.println(responseSecondPokemon.getBody());
-
         String pokemonName1 = "pikachu";
         String pokemonName2 = "slowpoke";
 
