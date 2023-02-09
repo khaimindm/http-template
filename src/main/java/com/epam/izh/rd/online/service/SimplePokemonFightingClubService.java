@@ -3,21 +3,31 @@ package com.epam.izh.rd.online.service;
 import com.epam.izh.rd.online.entity.Pokemon;
 
 public class SimplePokemonFightingClubService implements PokemonFightingClubService {
+    //Pokemon pokemonWinner;
 
     @Override
     public Pokemon doBattle(Pokemon p1, Pokemon p2) {
-        SimplePokemonFightingClubService simplePokemonFightingClubService = new SimplePokemonFightingClubService();
-        Pokemon pokemonWinner;
-        if(p1.getHp() <= 0) {
+        //SimplePokemonFightingClubService simplePokemonFightingClubService = new SimplePokemonFightingClubService();        
+        /*if(p1.getHp() <= 0) {
             pokemonWinner = p2;
         } else if (p2.getHp() <= 0) {
             pokemonWinner = p1;
         } else {
             
+        }*/
+        
+        System.out.println("hp защищающегося покемона: " + p2.getHp());
+        System.out.println("hp аттакующего покемона: " + p1.getHp());
+
+        
+        doDamage(p1, p2);
+        if(p2.getHp() <= 0) {
+            return p1;
+        } else if(p1.getHp() <= 0) {
+            return p2;
+        } else {
+            doBattle(p2, p1);
         }
-
-
-        simplePokemonFightingClubService.doDamage(p1, p2);
         
         return null;
     }
