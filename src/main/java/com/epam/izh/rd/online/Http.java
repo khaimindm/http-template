@@ -33,7 +33,7 @@ public class Http {
 
         ObjectMapperFactory objectMapperFactory = new SimpleObjectMapperFactory();
         PokemonFetchingService pokemonFetchingService = new SimplePokemonFetchingService(objectMapperFactory);
-        PokemonFightingClubService pokemonFightingClubService = new SimplePokemonFightingClubService();
+        PokemonFightingClubService pokemonFightingClubService = new SimplePokemonFightingClubService(objectMapperFactory);
 
         Pokemon pokemon1 = pokemonFetchingService.fetchByName(pokemonName1);
         Pokemon pokemon2 = pokemonFetchingService.fetchByName(pokemonName2);

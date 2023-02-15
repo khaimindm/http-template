@@ -1,5 +1,13 @@
 package com.epam.izh.rd.online.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
+
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -61,7 +69,24 @@ public class SimplePokemonFetchingService implements  PokemonFetchingService{
     }
 
     @Override
-    public byte[] getPokemonImage(String name) throws IllegalArgumentException {
-        return new byte[0];
+    public byte[] getPokemonImage(String name) throws IllegalArgumentException, IOException {
+        String url = "https://pokeapi.co/api/v2/pokemon/" + name;
+        headers.set("User-Agent", "");
+        HttpEntity<String> request = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, request, String.class);
+        String responseBody = response.getBody();
+
+        JsonNode obj = objectMapperFactory.getObjectMapper().readTree(responseBody);
+        String pokemonImageUrl = String.valueOf(obj.get("sprites").get("front_default"));
+        
+        System.out.println(pokemonImageUrl);
+
+        URL imageUrl = new URL(pokemonImageUrl);
+        BufferedImage bImage = ImageIO.read(imageUrl);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(bImage, "png", baos);
+        byte[] data = baos.toByteArray();
+        
+        return data;
     }
 }
