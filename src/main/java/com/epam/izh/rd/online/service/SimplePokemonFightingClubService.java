@@ -1,5 +1,8 @@
 package com.epam.izh.rd.online.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
@@ -7,6 +10,8 @@ import com.epam.izh.rd.online.entity.Pokemon;
 import com.epam.izh.rd.online.factory.ObjectMapperFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+
+import javax.imageio.ImageIO;
 
 public class SimplePokemonFightingClubService implements PokemonFightingClubService {
     private ObjectMapperFactory objectMapperFactory;
@@ -34,7 +39,9 @@ public class SimplePokemonFightingClubService implements PokemonFightingClubServ
     @Override
     public void showWinner(Pokemon winner) throws JsonMappingException, JsonProcessingException, IllegalArgumentException, MalformedURLException, IOException {
         PokemonFetchingService pokemonFetchingService = new SimplePokemonFetchingService(objectMapperFactory);
-        pokemonFetchingService.getPokemonImage(winner.getPokemonName());
+        ByteArrayInputStream bais = new ByteArrayInputStream(pokemonFetchingService.getPokemonImage(winner.getPokemonName()));
+        BufferedImage bImage = ImageIO.read(bais);
+        ImageIO.write(bImage, "png", new File("winner.png"));
     }
 
     @Override

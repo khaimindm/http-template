@@ -11,11 +11,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Http {
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) throws IOException {
         //RestTemplate restTemplate = new RestTemplate();
         //String urlFirstPokemon = "https://pokeapi.co/api/v2/pokemon/" + nameOfFirstPokemon;
         //String urlSecondPokemon = "https://pokeapi.co/api/v2/pokemon/" + nameOfSecondPokemon;
@@ -45,6 +46,8 @@ public class Http {
         } else {
             pokemonWinner = pokemonFightingClubService.doBattle(pokemon2, pokemon1);
         }
+
+        pokemonFightingClubService.showWinner(pokemonWinner);
 
         System.out.println("Pokemon winner: " + pokemonWinner.getPokemonName());
     }

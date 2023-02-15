@@ -1,21 +1,21 @@
 package com.epam.izh.rd.online.service;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
-
-import org.springframework.http.*;
-import org.springframework.web.client.RestTemplate;
-
 import com.epam.izh.rd.online.entity.Pokemon;
 import com.epam.izh.rd.online.factory.ObjectMapperFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.URL;
 
 public class SimplePokemonFetchingService implements  PokemonFetchingService{
     private ObjectMapperFactory objectMapperFactory;
@@ -77,16 +77,15 @@ public class SimplePokemonFetchingService implements  PokemonFetchingService{
         String responseBody = response.getBody();
 
         JsonNode obj = objectMapperFactory.getObjectMapper().readTree(responseBody);
-        String pokemonImageUrl = String.valueOf(obj.get("sprites").get("front_default"));
-        
-        System.out.println(pokemonImageUrl);
 
-        URL imageUrl = new URL(pokemonImageUrl);
+        String pokemonImageUrl = String.valueOf(obj.get("sprites").get("front_default"));
+
+        URL imageUrl = new URL(pokemonImageUrl.replace("\"", ""));
         BufferedImage bImage = ImageIO.read(imageUrl);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(bImage, "png", baos);
         byte[] data = baos.toByteArray();
-        
+
         return data;
     }
 }
